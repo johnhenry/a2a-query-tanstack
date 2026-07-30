@@ -27,7 +27,7 @@ jobs:
           node-version: 22
           cache: npm
           registry-url: https://registry.npmjs.org
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
       - name: Gate (typecheck + tests + build)
         run: |
           npm run typecheck

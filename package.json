@@ -42,5 +42,9 @@
     "react": "^19.2.8",
     "typescript": "^5.9.3",
     "vitest": "^4.1.9"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

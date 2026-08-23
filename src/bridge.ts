@@ -1,7 +1,7 @@
-// Live sync bridge: mirrors a2aq's OWN cache writes — task/card refetches,
+// Live sync bridge: mirrors a2a-query's OWN cache writes — task/card refetches,
 // push-folded updates, optimistic patch()/rollback — straight into TanStack
 // Query's cache via `setQueryData`. No extra refetch: for an actively-bridged
-// query, a2aq's cache (a real @johnhenry/agent-query-core QueryCache — a2aq
+// query, a2a-query's cache (a real @johnhenry/agent-query-core QueryCache — a2a-query
 // doesn't fork it) is the source of truth and TanStack Query is a
 // reactively-synced mirror.
 //
@@ -9,11 +9,11 @@
 // `ensureSynced` is called from inside each queryOptions() factory's queryFn.
 // Teardown is driven by TanStack's OWN lifecycle: a global
 // `queryClient.getQueryCache()` listener (registered once per QueryClient)
-// releases the a2aq-side `cache.subscribe()` ref when TanStack
+// releases the a2a-query-side `cache.subscribe()` ref when TanStack
 // garbage-collects the bridged query.
 
 import type { QueryClient } from "@tanstack/react-query";
-import type { A2AKey, A2AQuery } from "@johnhenry/a2aq";
+import type { A2AKey, A2AQuery } from "@johnhenry/a2a-query";
 
 interface SyncState {
   unsubs: Map<string, () => void>;

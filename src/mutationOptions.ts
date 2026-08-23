@@ -1,11 +1,11 @@
-// mutationOptions() factories for a2aq's side-effecting sendMessage. Optimistic
+// mutationOptions() factories for a2a-query's side-effecting sendMessage. Optimistic
 // updates are NOT reimplemented here on the TanStack side — see the package
-// README for why (same reasoning as mcpq-tanstack).
+// README for why (same reasoning as mcp-query-tanstack).
 
 import { mutationOptions } from "@tanstack/react-query";
 import type { QueryClient } from "@tanstack/react-query";
 import type { Message } from "@a2a-js/sdk";
-import type { A2AQuery, SendOptions, TaskHandle } from "@johnhenry/a2aq";
+import type { A2AQuery, SendOptions, TaskHandle } from "@johnhenry/a2a-query";
 import { taskQueryKey } from "./keys.js";
 
 /** `sendMessage` returns Message | TaskHandle — Message ALSO carries a (possibly

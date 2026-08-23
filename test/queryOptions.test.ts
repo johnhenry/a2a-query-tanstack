@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
-import { A2AQuery } from "@johnhenry/a2aq";
-import { MockA2AAgent, echoExecutor } from "@johnhenry/a2aq/testing";
+import { A2AQuery } from "@johnhenry/a2a-query";
+import { MockA2AAgent, echoExecutor } from "@johnhenry/a2a-query/testing";
 import { a2aqCardQueryOptions, a2aqTaskQueryOptions } from "../src/queryOptions.js";
 import type { Message } from "@a2a-js/sdk";
 
@@ -20,7 +20,7 @@ describe("a2aqTaskQueryOptions", () => {
     const sent = (await client.sendMessage("a1", msg("hi"))) as { taskId: string };
     const qc = newQueryClient();
     const opts = a2aqTaskQueryOptions(client, "a1", sent.taskId);
-    expect(opts.queryKey).toEqual(["a2aq", "a1", "task", sent.taskId]);
+    expect(opts.queryKey).toEqual(["a2a-query", "a1", "task", sent.taskId]);
     const task = await qc.fetchQuery(opts);
     expect(task.id).toBe(sent.taskId);
   });
@@ -33,7 +33,7 @@ describe("a2aqCardQueryOptions", () => {
 
     const qc = newQueryClient();
     const opts = a2aqCardQueryOptions(client, "a1");
-    expect(opts.queryKey).toEqual(["a2aq", "a1", "card"]);
+    expect(opts.queryKey).toEqual(["a2a-query", "a1", "card"]);
     const card = await qc.fetchQuery(opts);
     expect(card.name).toBe("support-agent");
   });

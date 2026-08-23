@@ -1,4 +1,4 @@
-// queryOptions() factories bridging a2aq's own reads into TanStack Query.
+// queryOptions() factories bridging a2a-query's own reads into TanStack Query.
 // Sync propagation (attachA2aqSync, in bridge.ts) is what actually keeps a
 // bridged query's TanStack cache entry fresh on task/card refetch, push
 // events, and optimistic patches — the queryFn here only supplies the FIRST
@@ -6,7 +6,7 @@
 
 import { queryOptions, type UseQueryOptions } from "@tanstack/react-query";
 import type { AgentCard, Task } from "@a2a-js/sdk";
-import type { A2AQuery } from "@johnhenry/a2aq";
+import type { A2AQuery } from "@johnhenry/a2a-query";
 import { cardQueryKey, taskQueryKey } from "./keys.js";
 import { ensureSynced } from "./bridge.js";
 

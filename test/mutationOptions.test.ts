@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
-import { A2AQuery } from "@johnhenry/a2aq";
-import { MockA2AAgent, echoExecutor } from "@johnhenry/a2aq/testing";
+import { A2AQuery } from "@johnhenry/a2a-query";
+import { MockA2AAgent, echoExecutor } from "@johnhenry/a2a-query/testing";
 import { a2aqSendMessageMutationOptions } from "../src/mutationOptions.js";
 import type { Message } from "@a2a-js/sdk";
 
@@ -33,6 +33,6 @@ describe("a2aqSendMessageMutationOptions", () => {
     const result = (await opts.mutationFn!(msg("hi"), { client: qc, meta: undefined })) as { taskId: string };
     await (opts.onSuccess as (...args: unknown[]) => unknown)?.(result);
 
-    expect(invalidated).toEqual([{ queryKey: ["a2aq", "a1", "task", result.taskId] }]);
+    expect(invalidated).toEqual([{ queryKey: ["a2a-query", "a1", "task", result.taskId] }]);
   });
 });

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
-import { A2AQuery } from "@johnhenry/a2aq";
-import { MockA2AAgent, echoExecutor } from "@johnhenry/a2aq/testing";
+import { A2AQuery } from "@johnhenry/a2a-query";
+import { MockA2AAgent, echoExecutor } from "@johnhenry/a2a-query/testing";
 import { ensureSynced } from "../src/bridge.js";
 import { taskQueryKey } from "../src/keys.js";
 import type { Message } from "@a2a-js/sdk";
@@ -22,7 +22,7 @@ describe("ensureSynced (live sync bridge, real agent-query-core QueryCache)", ()
     const queryKey = taskQueryKey("a1", sent.taskId);
     ensureSynced(client, qc, cacheKey, queryKey);
 
-    // Drive a real write on the SAME QueryCache instance a2aq uses internally —
+    // Drive a real write on the SAME QueryCache instance a2a-query uses internally —
     // no mock/fake, this is agent-query-core's real class.
     client.cache.write(cacheKey, { id: sent.taskId, status: { state: 99 } } as never, { tags: [] });
     await tick();
@@ -44,7 +44,7 @@ describe("ensureSynced (live sync bridge, real agent-query-core QueryCache)", ()
     expect(client.cache.getSnapshot(cacheKey)?.subscribers).toBe(subscribersBefore);
   });
 
-  it("releases the a2aq-side subscription when TanStack removes the query (gc)", async () => {
+  it("releases the a2a-query-side subscription when TanStack removes the query (gc)", async () => {
     const mock = new MockA2AAgent(echoExecutor());
     const client = new A2AQuery({ agents: { a1: { url: mock.url, fetchImpl: mock.fetchImpl } }, taskPollMs: 15 });
     const sent = (await client.sendMessage("a1", msg("hi"))) as { taskId: string };

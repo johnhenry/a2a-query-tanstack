@@ -1,5 +1,7 @@
 # @johnhenry/a2a-query-tanstack
 
+Full documentation: [opensource.johnhenry.me/agent-query/a2a-query-tanstack](https://opensource.johnhenry.me/agent-query/a2a-query-tanstack/)
+
 TanStack Query bridge for [`@johnhenry/a2a-query`](https://github.com/johnhenry/a2a-query) — `queryOptions`/`mutationOptions` factories that delegate fetching to a2a-query while syncing its own reactive cache into TanStack Query's, with zero extra refetches.
 
 ## Install

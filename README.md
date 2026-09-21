@@ -1,5 +1,9 @@
 # @johnhenry/a2a-query-tanstack
 
+[![npm version](https://img.shields.io/npm/v/%40johnhenry%2Fa2a-query-tanstack.svg)](https://www.npmjs.com/package/@johnhenry/a2a-query-tanstack)
+[![CI](https://github.com/johnhenry/a2a-query-tanstack/actions/workflows/test.yml/badge.svg)](https://github.com/johnhenry/a2a-query-tanstack/actions/workflows/test.yml)
+[![license](https://img.shields.io/npm/l/%40johnhenry%2Fa2a-query-tanstack.svg)](LICENSE)
+
 Full documentation: [opensource.johnhenry.me/agent-query/a2a-query-tanstack](https://opensource.johnhenry.me/agent-query/a2a-query-tanstack/)
 
 TanStack Query bridge for [`@johnhenry/a2a-query`](https://github.com/johnhenry/a2a-query) — `queryOptions`/`mutationOptions` factories that delegate fetching to a2a-query while syncing its own reactive cache into TanStack Query's, with zero extra refetches.

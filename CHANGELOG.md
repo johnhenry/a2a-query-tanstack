@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## Unreleased
 
 ### Added
 
@@ -8,7 +8,7 @@
 - README expanded: per-factory documentation, the query-key/invalidation table, and the staleness/refetch traps section.
 - This changelog.
 
-## [0.0.0] - 2026-08-23
+## 0.0.0 — npm scope migration (2026-08-23)
 
 ### Changed
 

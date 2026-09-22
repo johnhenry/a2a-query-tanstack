@@ -8,11 +8,26 @@ Full documentation: [opensource.johnhenry.me/agent-query/a2a-query-tanstack](htt
 
 TanStack Query bridge for [`@johnhenry/a2a-query`](https://github.com/johnhenry/a2a-query) — `queryOptions`/`mutationOptions` factories that delegate fetching to a2a-query while syncing its own reactive cache into TanStack Query's, with zero extra refetches.
 
+## Contents
+
+- [Install](#install)
+- [Usage](#usage)
+- [The three factories](#the-three-factories)
+- [Query keys and invalidation](#query-keys-and-invalidation)
+- [How the sync bridge works](#how-the-sync-bridge-works)
+- [Staleness and refetch traps](#staleness-and-refetch-traps)
+- [Examples](#examples)
+- [Honest limitations](#honest-limitations)
+- [Family](#family)
+- [License](#license)
+
 ## Install
 
 ```sh
 npm install @johnhenry/a2a-query-tanstack @johnhenry/a2a-query @tanstack/react-query
 ```
+
+Previously published as `@johnhenry/a2aq-tanstack`; versioning restarted at `0.0.0` under this scoped name as part of the agent-query family rename (see CHANGELOG).
 
 ## Usage
 
@@ -97,6 +112,20 @@ npm run example:03   # sendMessage mutation invalidating the reply task's queryK
 npm run examples     # all of them
 ```
 
-## Scope
+## Honest limitations
 
-Verification/simulation-shaped: this package only bridges reads (`task`, `card`) and the one send mutation. `respond`/`cancel`/artifacts are not yet wrapped in `queryOptions`/`mutationOptions` — use `A2AQuery`/`TaskHandle` directly for those (`artifactQueryKey` exists so your own artifact wrappers land under the right prefix); PRs welcome.
+- **Only reads and the one send mutation are wrapped.** `queryOptions`/`mutationOptions` factories exist for `task`, `card` (reads) and `sendMessage` (the one mutation) — that's the full surface. `respond`, `cancel`, and artifact fetches have no factory of their own; call `A2AQuery`/`TaskHandle` directly for those instead of going through this package. This gap is pending, not permanent — PRs welcome (no tracking issue is currently open).
+- **Artifacts get a query-key helper, not a query.** `artifactQueryKey(agent, taskId, artifactId)` exists so a hand-written artifact query still lands under the right prefix for invalidation, but there is no `queryOptions`/`mutationOptions` factory that actually fetches an artifact for you — you write that `queryFn` yourself. Also pending.
+
+## Family
+
+`a2a-query-tanstack` isn't a standalone cache — it's the designed TanStack Query bridge for `@johnhenry/a2a-query`'s reactive cache, and its tag vocabulary comes directly from `@johnhenry/agent-query-core`.
+
+- **[`@johnhenry/a2a-query`](https://github.com/johnhenry/a2a-query)** — a2a-query's `QueryCache` is the source of truth: its `subscribe`/`getSnapshot` API drives this package's sync bridge (`ensureSynced`, wired explicitly via `attachA2aqSync`), mirroring every task/card refetch, push-folded update, and optimistic `patch()`/rollback straight into TanStack Query's cache via `setQueryData` — a real dependency on `@johnhenry/a2a-query`'s cache, not a fork of it. See "How the sync bridge works" above for the full mechanism.
+- **[`@johnhenry/agent-query-core`](https://github.com/johnhenry/agent-query-core)** — a2a-query's `QueryCache` is a real `@johnhenry/agent-query-core` `QueryCache` instance, and this package's `Tag` type (used by `tagToQueryKeyPrefix`) is imported directly from core rather than re-declared — a dependency on core's public cache/tag vocabulary, not on a2a-query's own reimplementation of it.
+
+`@johnhenry/mcp-query-tanstack` solves the same problem one protocol over — the same `queryOptions`/`mutationOptions`-factory shape, but bridging `@johnhenry/mcp-query`'s cache instead of a2a-query's.
+
+## License
+
+MIT

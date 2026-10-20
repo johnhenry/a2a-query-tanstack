@@ -27,6 +27,27 @@ TanStack Query bridge for [`@johnhenry/a2a-query`](https://github.com/johnhenry/
 npm install @johnhenry/a2a-query-tanstack @johnhenry/a2a-query @tanstack/react-query
 ```
 
+### Without React
+
+Nothing in this package imports React. Vue, Svelte, vanilla and notebook runtimes install
+the TanStack core instead of `@tanstack/react-query`, and use the same factories from
+the root or the explicit `./core` entry (identical exports):
+
+```sh
+npm install @johnhenry/a2a-query-tanstack @johnhenry/a2a-query @tanstack/query-core
+```
+
+```ts
+import { QueryClient } from "@tanstack/query-core";
+import { a2aqTaskQueryOptions } from "@johnhenry/a2a-query-tanstack/core";
+
+const task = await new QueryClient().fetchQuery(a2aqTaskQueryOptions(client, "support", taskId));
+```
+
+`@tanstack/query-core` is a required peer; `@tanstack/react-query` and `react` are
+optional peers (install them only if you use the React hooks). Adapters like
+`@tanstack/vue-query` and `@tanstack/svelte-query` accept the same options objects.
+
 Previously published as `@johnhenry/a2aq-tanstack`; versioning restarted at `0.0.0` under this scoped name as part of the agent-query family rename (see CHANGELOG).
 
 ## Usage

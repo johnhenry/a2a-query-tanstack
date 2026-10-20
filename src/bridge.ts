@@ -12,7 +12,7 @@
 // releases the a2a-query-side `cache.subscribe()` ref when TanStack
 // garbage-collects the bridged query.
 
-import type { QueryClient } from "@tanstack/react-query";
+import type { QueryClient } from "@tanstack/query-core";
 import type { A2AKey, A2AQuery } from "@johnhenry/a2a-query";
 
 interface SyncState {

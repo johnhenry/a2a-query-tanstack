@@ -2,8 +2,7 @@
 // updates are NOT reimplemented here on the TanStack side — see the package
 // README for why (same reasoning as mcp-query-tanstack).
 
-import { mutationOptions } from "@tanstack/react-query";
-import type { QueryClient } from "@tanstack/react-query";
+import type { MutationObserverOptions, QueryClient } from "@tanstack/query-core";
 import type { Message } from "@a2a-js/sdk";
 import type { A2AQuery, SendOptions, TaskHandle } from "@johnhenry/a2a-query";
 import { taskQueryKey } from "./keys.js";
@@ -16,10 +15,11 @@ function isTaskHandle(result: Message | TaskHandle): result is TaskHandle {
 }
 
 export function a2aqSendMessageMutationOptions(client: A2AQuery, queryClient: QueryClient, agent: string, opts: SendOptions = {}) {
-  return mutationOptions({
+  const options: MutationObserverOptions<Message | TaskHandle, Error, Message> = {
     mutationFn: (message: Message) => client.sendMessage(agent, message, opts),
     onSuccess: (result) => {
       if (isTaskHandle(result)) void queryClient.invalidateQueries({ queryKey: taskQueryKey(agent, result.taskId) as unknown[] });
     },
-  });
+  };
+  return options;
 }

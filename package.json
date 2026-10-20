@@ -1,7 +1,7 @@
 {
   "name": "@johnhenry/a2a-query-tanstack",
-  "version": "0.0.0",
-  "description": "TanStack Query bridge for @johnhenry/a2a-query — queryOptions/mutationOptions factories that sync a2a-query's own reactive cache into TanStack Query, including task/card push updates and optimistic updates, with zero extra refetches.",
+  "version": "0.1.0",
+  "description": "TanStack Query bridge for @johnhenry/a2a-query \u2014 queryOptions/mutationOptions factories that sync a2a-query's own reactive cache into TanStack Query, including task/card push updates and optimistic updates, with zero extra refetches.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/johnhenry/a2a-query-tanstack.git"
@@ -24,6 +24,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./core": {
+      "types": "./dist/core.d.ts",
+      "default": "./dist/core.js"
     }
   },
   "scripts": {
@@ -38,7 +42,8 @@
     "examples": "npm run example:01 && npm run example:02 && npm run example:03"
   },
   "peerDependencies": {
-    "@johnhenry/a2a-query": "0.0.0",
+    "@johnhenry/a2a-query": ">=0.0.0 <0.2.0",
+    "@tanstack/query-core": "^5.0.0",
     "@tanstack/react-query": "^5.0.0",
     "react": "^18.0.0 || ^19.0.0"
   },
@@ -46,7 +51,9 @@
     "@a2a-js/sdk": "1.0.1",
     "@johnhenry/a2a-query": "0.0.0",
     "@johnhenry/agent-query-core": "^0.1.0-rc.4",
+    "@tanstack/query-core": "^5.102.1",
     "@tanstack/react-query": "^5.101.4",
+    "@types/node": "^26.6.5",
     "react": "^19.2.8",
     "tsx": "^4.23.1",
     "typescript": "^5.9.3",
@@ -55,5 +62,13 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "peerDependenciesMeta": {
+    "@tanstack/react-query": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
   }
 }

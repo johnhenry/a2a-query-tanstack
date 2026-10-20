@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 0.1.0
+
+- **React-free entry** (johnhenry/a2a-query-tanstack#11): the factories and bridge now depend on
+  `@tanstack/query-core` only; the root and a new `./core` entry export the same API without
+  importing React. `@tanstack/query-core` is a required peer, `@tanstack/react-query` and `react`
+  are optional peers. Option types are `QueryObserverOptions`-based (React's `UseQueryOptions` values
+  remain assignable); return types are the new `A2aqQueryOptions<T>`, which still brands the key so
+  `useQuery` infers the data type. Unblocks johnhenry/viaframe#546.
+- Peer range for `@johnhenry/a2a-query` widened from the exact `0.0.0` to `>=0.0.0 <0.2.0`, so the
+  upcoming a2a-query 0.1.0 satisfies it (publish a2a-query first).
+
 ### Added
 
 - Numbered, runnable examples (`examples/01`–`03`, `npm run example:NN` / `npm run examples`) — headless Node runs against the in-process mock agent, matching the family's examples convention.

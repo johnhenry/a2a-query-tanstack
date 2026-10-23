@@ -1,7 +1,7 @@
 {
   "name": "@johnhenry/a2a-query-tanstack",
-  "version": "0.1.0",
-  "description": "TanStack Query bridge for @johnhenry/a2a-query \u2014 queryOptions/mutationOptions factories that sync a2a-query's own reactive cache into TanStack Query, including task/card push updates and optimistic updates, with zero extra refetches.",
+  "version": "0.1.1",
+  "description": "TanStack Query bridge for @johnhenry/a2a-query — queryOptions/mutationOptions factories that sync a2a-query's own reactive cache into TanStack Query, including task/card push updates and optimistic updates, with zero extra refetches.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/johnhenry/a2a-query-tanstack.git"

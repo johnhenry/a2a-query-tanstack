@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.1.1
+
+- Republish so `latest` points at the current release (0.1.0 was published under the `rc` tag); stable versions now publish to `latest`.
+
 ## 0.1.0
 
 - **React-free entry** (johnhenry/a2a-query-tanstack#11): the factories and bridge now depend on
